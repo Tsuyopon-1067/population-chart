@@ -40,3 +40,8 @@ npx husky-init
         - 関数の名前付け
     - [Next.js で API を実装してみた](https://zenn.dev/yumemi_inc/articles/nextjs-rest-api)
     - [Next.jsを使ったAPI開発](https://qiita.com/hukuryo/items/56a516d6252326c8e2cf)
+
+### チェックボックスの実装
+- 実装の参考
+    - [日本語対応！CSS Flexboxのチートシートを作ったので配布します](https://www.webcreatorbox.com/blog/css-flexbox-cheat-sheet)
+        - Flexでは最後の配置が不自然になるためCSS Gridに以降
