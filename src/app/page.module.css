@@ -1,0 +1,10 @@
+.mainDiv {
+  display: flex;
+  flex-direction: column;
+  padding: 18px;
+  h2 {
+    display: block;
+    font-size: 24px;
+    font-weight: bold;
+  }
+}
