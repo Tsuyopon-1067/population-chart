@@ -33,3 +33,10 @@ npx husky-init
     - 使用しない引数があるときのESLintエラー解消（自己解決できなかったのでAI使用）
         - [no-unused-vars](https://eslint.org/docs/latest/rules/no-unused-vars)
         - [Eslintでunderscoreから始まる変数をチェックさせない設定にする](https://shotat.hateblo.jp/entry/2016/10/26/000912)
+
+### プロキシAPIの実装
+- 実装の参考
+    - エンドポイントの続きの呼び方がわからなかったのでAIに質問
+        - 関数の名前付け
+    - [Next.js で API を実装してみた](https://zenn.dev/yumemi_inc/articles/nextjs-rest-api)
+    - [Next.jsを使ったAPI開発](https://qiita.com/hukuryo/items/56a516d6252326c8e2cf)
