@@ -1,0 +1,12 @@
+.mainDiv {
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  font-size: 18px;
+  justify-content: space-between;
+}
+
+.form {
+  min-width: 5em;
+  display: block;
+}
