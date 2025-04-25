@@ -9,13 +9,14 @@ const compat = new FlatCompat({
   baseDirectory: __dirname,
 });
 
-const eslintConfig = [...compat.extends('next/core-web-vitals', 'next/typescript'),
-{
-  rules: {
-    'semi': ['error', 'always'],
-    'quotes': ['error', 'single'],
-  }
-}
+const eslintConfig = [
+  ...compat.extends('next/core-web-vitals', 'next/typescript'),
+  {
+    rules: {
+      semi: ['error', 'always'],
+      quotes: ['error', 'single'],
+    },
+  },
 ];
 
 export default eslintConfig;
