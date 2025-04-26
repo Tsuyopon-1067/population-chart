@@ -21,18 +21,20 @@ describe('ChartController', () => {
   });
 
   test('createSelectedLabelLineData', async () => {
-    const actual = createSelectedLabelLineData(
+    const { selectedLabelLineData, selectedPrefNameList } = createSelectedLabelLineData(
       '年少人口',
       [1, 3],
       compositionMapMock,
       checkboxData,
     );
-    expect(actual[0]['year']).toBe('1960');
-    expect(actual[0]['北海道']).toBe(1681479);
-    expect(actual[0]['岩手県']).toBe(501782);
-    expect(actual[1]['year']).toBe('1965');
-    expect(actual[1]['北海道']).toBe(1462123);
-    expect(actual[1]['岩手県']).toBe(429521);
+    expect(selectedLabelLineData[0]['year']).toBe('1960');
+    expect(selectedLabelLineData[0]['北海道']).toBe(1681479);
+    expect(selectedLabelLineData[0]['岩手県']).toBe(501782);
+    expect(selectedLabelLineData[1]['year']).toBe('1965');
+    expect(selectedLabelLineData[1]['北海道']).toBe(1462123);
+    expect(selectedLabelLineData[1]['岩手県']).toBe(429521);
+    expect(selectedPrefNameList[0]).toBe('北海道');
+    expect(selectedPrefNameList[1]).toBe('岩手県');
   });
 });
 

@@ -16,9 +16,10 @@ import {
 
 interface DynamicChartProps {
   data: LineChartData[];
+  prefNameList: string[];
 }
 
-export const DynamicChart = ({ data }: DynamicChartProps) => {
+export const DynamicChart = ({ data, prefNameList }: DynamicChartProps) => {
   const windowWidth = useWindowWidth();
 
   interface LegendLayout {
@@ -48,8 +49,7 @@ export const DynamicChart = ({ data }: DynamicChartProps) => {
           layout={legendLayout.layout}
           verticalAlign={legendLayout.verticalAlign}
         />
-        {data.map((entry, key) => {
-          const name = entry.name;
+        {prefNameList.map((name, key) => {
           const hue = (key / data.length) * 360;
           const color = 'hsl(' + hue + ', 100%, 50%)';
           return <Line key={key} type='monotone' dataKey={name} stroke={color} />;

@@ -28,7 +28,7 @@ export const ChartController = ({
     return <div>Loading...</div>;
   }
 
-  const selectedLabelLineData = createSelectedLabelLineData(
+  const { selectedLabelLineData, selectedPrefNameList } = createSelectedLabelLineData(
     selectedLabel,
     checkedPrefCodeList,
     compositionMap,
@@ -44,7 +44,7 @@ export const ChartController = ({
           </button>
         ))}
       </div>
-      <DynamicChart data={selectedLabelLineData} />
+      <DynamicChart data={selectedLabelLineData} prefNameList={selectedPrefNameList} />
     </div>
   );
 };
@@ -78,9 +78,9 @@ export const createSelectedLabelLineData = (
   checkedPrefCodeList: number[],
   compositionMap: Map<number, PopulationCompositionPerYear>,
   checkboxData: CheckboxData[],
-) => {
+): { selectedLabelLineData: LineChartData[]; selectedPrefNameList: string[] } => {
   if (checkedPrefCodeList.length === 0) {
-    return [];
+    return { selectedLabelLineData: [], selectedPrefNameList: [] };
   }
   const selectedPrefNameList = createSelectedPrefNameList(checkedPrefCodeList, checkboxData);
   const selectedCompositionDataList = createSelectedCompositionDataList(
@@ -101,5 +101,5 @@ export const createSelectedLabelLineData = (
     });
     return oneYearSelectedLabelLineData;
   });
-  return selectedLabelLineData;
+  return { selectedLabelLineData, selectedPrefNameList };
 };
