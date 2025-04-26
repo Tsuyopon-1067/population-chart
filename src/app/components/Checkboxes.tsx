@@ -27,23 +27,26 @@ export const Checkboxes = ({
   }
   return (
     <div className={styles.mainDiv}>
-      {prefectures.map((prefecture, key) => (
-        <form className={styles.form} key={key}>
-          <input
-            className={styles.checkbox}
-            type='checkbox'
-            value={prefecture.prefCode}
-            checked={checkStatus[key].checked}
-            onChange={() => {
-              const newCheckStatus = [...checkStatus];
-              newCheckStatus[key].checked = !newCheckStatus[key].checked;
-              setCheckStatus(newCheckStatus);
-              updateCheckState(prefecture.prefCode, newCheckStatus);
-            }}
-          />
-          <label>{prefecture.prefName}</label>
-        </form>
-      ))}
+      <h2>都道府県</h2>
+      <div className={styles.checkboxArea}>
+        {prefectures.map((prefecture, key) => (
+          <form className={styles.form} key={key}>
+            <input
+              className={styles.checkbox}
+              type='checkbox'
+              value={prefecture.prefCode}
+              checked={checkStatus[key].checked}
+              onChange={() => {
+                const newCheckStatus = [...checkStatus];
+                newCheckStatus[key].checked = !newCheckStatus[key].checked;
+                setCheckStatus(newCheckStatus);
+                updateCheckState(prefecture.prefCode, newCheckStatus);
+              }}
+            />
+            <label>{prefecture.prefName}</label>
+          </form>
+        ))}
+      </div>
     </div>
   );
 };
