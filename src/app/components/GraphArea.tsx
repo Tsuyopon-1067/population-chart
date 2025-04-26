@@ -1,11 +1,11 @@
 'use client';
 
 import styles from './GraphArea.module.css';
-import { CheckboxData } from '@/type/checkboxData';
-import { GraphPopulationCompositionData } from '@/type/graphPopulationCompositionData';
-import { PopulationCompositionEntry } from '@/type/populationCompositionEntry';
-import { PopulationCompositionLabel } from '@/type/populationCompositionLabel';
-import { PopulationCompositionPerYear } from '@/type/populationCompositionPerYear';
+import { CheckboxData } from '@/app/type/checkboxData';
+import { GraphPopulationCompositionData } from '@/app/type/graphPopulationCompositionData';
+import { PopulationCompositionEntry } from '@/app/type/populationCompositionEntry';
+import { PopulationCompositionLabel } from '@/app/type/populationCompositionLabel';
+import { PopulationCompositionPerYear } from '@/app/type/populationCompositionPerYear';
 import { useState } from 'react';
 import { DynamicChart } from './DynamicChart';
 

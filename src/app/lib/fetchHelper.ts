@@ -1,5 +1,5 @@
-import { PopulationCompositionPerYearResponse } from '@/type/populationCompositionPerYearResponse';
-import { PrefecturesResponse } from '@/type/prefecturesResponse';
+import { PopulationCompositionPerYearResponse } from '@/app/type/populationCompositionPerYearResponse';
+import { PrefecturesResponse } from '@/app/type/prefecturesResponse';
 
 export const fetchHelper = async (
   resource: string,

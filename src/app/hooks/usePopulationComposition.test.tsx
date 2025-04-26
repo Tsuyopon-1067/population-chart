@@ -1,8 +1,8 @@
-import { CheckboxData } from '@/type/checkboxData';
+import { CheckboxData } from '@/app/type/checkboxData';
 import { usePopulationComposition } from './usePopulationComposition';
 import { renderHook, act } from '@testing-library/react';
 import { waitFor } from '@testing-library/react';
-import { PopulationCompositionPerYearResponse } from '@/type/populationCompositionPerYearResponse';
+import { PopulationCompositionPerYearResponse } from '@/app/type/populationCompositionPerYearResponse';
 
 beforeEach(() => {
   global.fetch = jest.fn((url) => {

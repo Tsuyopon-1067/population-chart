@@ -1,8 +1,8 @@
 'use client';
 
-import { CheckboxData } from '@/type/checkboxData';
-import { PopulationCompositionPerYear } from '@/type/populationCompositionPerYear';
-import { PopulationCompositionPerYearResponse } from '@/type/populationCompositionPerYearResponse';
+import { CheckboxData } from '@/app/type/checkboxData';
+import { PopulationCompositionPerYear } from '@/app/type/populationCompositionPerYear';
+import { PopulationCompositionPerYearResponse } from '@/app/type/populationCompositionPerYearResponse';
 import { useState } from 'react';
 
 export const usePopulationComposition = (): [

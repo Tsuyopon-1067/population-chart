@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from 'react';
 import styles from './page.module.css';
-import { Prefecture } from '@/type/prefecture';
-import { PrefecturesResponse } from '@/type/prefecturesResponse';
+import { Prefecture } from '@/app/type/prefecture';
+import { PrefecturesResponse } from '@/app/type/prefecturesResponse';
 import { Checkboxes } from './components/Checkboxes';
-import { CheckboxData } from '@/type/checkboxData';
+import { CheckboxData } from '@/app/type/checkboxData';
 import { usePopulationComposition } from './hooks/usePopulationComposition';
 import { GraphArea } from './components/GraphArea';
 

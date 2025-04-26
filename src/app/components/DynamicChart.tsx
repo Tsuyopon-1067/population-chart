@@ -1,7 +1,7 @@
 'use client';
 
-import { GraphPopulationCompositionData } from '@/type/graphPopulationCompositionData';
-import { LineChartData } from '@/type/lineChartData';
+import { GraphPopulationCompositionData } from '@/app/type/graphPopulationCompositionData';
+import { LineChartData } from '@/app/type/lineChartData';
 import {
   LineChart,
   CartesianGrid,
