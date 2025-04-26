@@ -33,12 +33,19 @@ export const ChartController = ({
     checkboxData,
   );
 
+  const getButtonClass = (label: string, selectedLabel: string) => {
+    if (label === selectedLabel) {
+      return `${styles.selectedButton} ${styles.button}`;
+    }
+    return `${styles.button}`;
+  };
+
   return (
     <div className={styles.mainDiv}>
       <div className={styles.buttonArea}>
         {PopulationCompositionLabel.map((label, key) => (
           <button
-            className={styles.button}
+            className={getButtonClass(label, selectedLabel)}
             key={key}
             onClick={() => setSelectedLabel(label)}
             disabled={isDisabled}
