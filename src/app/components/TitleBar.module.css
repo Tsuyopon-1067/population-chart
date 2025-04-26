@@ -1,0 +1,9 @@
+.mainDiv {
+  width: 100vw;
+  padding: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  background-color: var(--theme-color);
+  box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.4);
+}
