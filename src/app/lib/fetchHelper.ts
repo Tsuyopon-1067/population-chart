@@ -4,7 +4,7 @@ import { PrefecturesResponse } from '../type/prefecturesResponse';
 export const fetchHelper = async (
   resource: string,
 ): Promise<PopulationCompositionPerYearResponse | PrefecturesResponse> => {
-  const API_KEY = process.env.YUMEMI_API_KEY;
+  const API_KEY = process.env.NEXT_PUBLIC_YUMEMI_API_KEY;
   const BASE_URL = 'https://yumemi-frontend-engineer-codecheck-api.vercel.app';
 
   return await fetch(`${BASE_URL}${resource}`, {

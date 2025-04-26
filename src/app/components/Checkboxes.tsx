@@ -17,7 +17,6 @@ export const Checkboxes = ({
   setCheckStatus,
   updateCheckState,
 }: CheckboxesProps) => {
-  console.log(prefectures, checkStatus);
   if (!prefectures || !checkStatus || prefectures.length === 0) {
     return (
       <div className={styles.loading}>

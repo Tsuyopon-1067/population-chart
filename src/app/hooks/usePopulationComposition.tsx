@@ -4,6 +4,7 @@ import { CheckboxData } from '@/app/type/checkboxData';
 import { PopulationCompositionPerYear } from '@/app/type/populationCompositionPerYear';
 import { PopulationCompositionPerYearResponse } from '@/app/type/populationCompositionPerYearResponse';
 import { useState } from 'react';
+import { fetchHelper } from '../lib/fetchHelper';
 
 export const usePopulationComposition = (): [
   (prefCode: number, checkboxData: CheckboxData[]) => Promise<void>,
@@ -18,8 +19,7 @@ export const usePopulationComposition = (): [
   const fetchPopulationComposition = async (
     prefCode: number,
   ): Promise<PopulationCompositionPerYear> => {
-    return fetch(`/api/v1/population/composition/perYear?prefCode=${prefCode}`)
-      .then((response) => response.json())
+    return fetchHelper(`/api/v1/population/composition/perYear?prefCode=${prefCode}`)
       .then((data) => {
         const response = data as PopulationCompositionPerYearResponse;
         return response.result;
