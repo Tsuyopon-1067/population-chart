@@ -20,7 +20,9 @@ export const GraphArea = ({
   compositionMap,
   checkedPrefCodeList,
 }: GraphAreaProps) => {
-  const [selectedLabel, _setSelectedLabel] = useState<PopulationCompositionLabel>('総人口');
+  const PopulationCompositionLabel = ['総人口', '年少人口', '生産年齢人口', '老年人口'] as const;
+  const [selectedLabel, setSelectedLabel] =
+    useState<(typeof PopulationCompositionLabel)[number]>('総人口');
 
   if (!checkboxData || !compositionMap) {
     return <div>Loading...</div>;
@@ -47,6 +49,13 @@ export const GraphArea = ({
 
   return (
     <div className={styles.mainDiv}>
+      <div className={styles.buttonArea}>
+        {PopulationCompositionLabel.map((label, key) => (
+          <button className={styles.button} key={key} onClick={() => setSelectedLabel(label)}>
+            {label}
+          </button>
+        ))}
+      </div>
       <DynamicChart data={displayedData} />
     </div>
   );
