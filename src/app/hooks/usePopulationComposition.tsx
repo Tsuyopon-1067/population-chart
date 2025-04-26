@@ -11,7 +11,7 @@ export const usePopulationComposition = (): [
   const [compositionList, setCompositionList] = useState<PopulationCompositionPerYear[]>();
 
   const fetchPopulationComposition = async (prefCode: number) => {
-    fetch(`/api/v1/population/composition/perYear?prefCode=${prefCode}`)
+    await fetch(`/api/v1/population/composition/perYear?prefCode=${prefCode}`)
       .then((response) => response.json())
       .then((data) => {
         const response = data as PopulationCompositionPerYearResponse;
