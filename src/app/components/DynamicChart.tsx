@@ -21,6 +21,9 @@ interface DynamicChartProps {
 
 export const DynamicChart = ({ data, prefNameList }: DynamicChartProps) => {
   const windowWidth = useWindowWidth();
+  if (prefNameList.length === 0) {
+    return;
+  }
 
   interface LegendLayout {
     align: 'left' | 'right';
