@@ -45,3 +45,36 @@ npx husky-init
 - 実装の参考
     - [日本語対応！CSS Flexboxのチートシートを作ったので配布します](https://www.webcreatorbox.com/blog/css-flexbox-cheat-sheet)
         - Flexでは最後の配置が不自然になるためCSS Gridに以降
+
+### 人口構成取得Hooksの実装
+- 実装の参考
+    - [型ガード](https://typescript-jp.gitbook.io/deep-dive/type-system/typeguard)
+    - [TypeScriptの型と実態がズレるとき、型付けにどう向き合っていくか](https://zenn.dev/mybest_dev/articles/82ef8c34dfd1b7)
+    - Mapからの配列生成で調べたが実際には必要なかった
+
+### Hooksのテスト
+```bash
+yarn add -D @testing-library/react
+yarn add -D jest
+yarn add -D ts-jest
+yarn add -D @types/jest
+yarn add -D @testing-library/jest-dom
+yarn add -D jest-environment-jsdom
+
+yarn add -D jest jest-environment-jsdom @testing-library/react @testing-library/dom @testing-library/jest-dom ts-node @types/jest
+@testing-library/react-hooks
+yarn ts-jest config:init
+```
+
+- 実装の参考
+    - [【React】カスタムフックのテストはこんな感じに書くといいよ](https://qiita.com/anneau/items/c3a1779ba228b23d0956)
+    - [How to set up Jest with Next.js](https://nextjs.org/docs/pages/guides/testing/jest)
+    - [TypeScript + Reactの開発環境にjestを導入する](https://zenn.dev/monkutarekun/articles/caa297e8a31a83)
+    - (https://zenn.dev/hamworks/articles/3d623eede50de4)
+    - 最終的にAIに聞いた
+    - [React Hooksでテストをゴリゴリ書きたい - react-reduxやaxiosが使われているような場合もゴリゴリテストを書きたい](https://zenn.dev/bom_shibuya/articles/5c3ae7745c5e94)
+- メモ
+    - `map`に登録した値が永遠に`undefined`だった．諦めてAIに聞いたら`Promise`が～と言っていたので試しに`fetch`に`await`をつけたら解決．
+
+### map更新問題
+- ひたすらconsoleデバッグ．
