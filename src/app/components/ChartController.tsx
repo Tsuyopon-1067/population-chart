@@ -1,6 +1,6 @@
 'use client';
 
-import styles from './GraphArea.module.css';
+import styles from './ChartController.module.css';
 import { CheckboxData } from '@/app/type/checkboxData';
 import { GraphPopulationCompositionData } from '@/app/type/graphPopulationCompositionData';
 import { PopulationCompositionEntry } from '@/app/type/populationCompositionEntry';
@@ -9,17 +9,17 @@ import { PopulationCompositionPerYear } from '@/app/type/populationCompositionPe
 import { useState } from 'react';
 import { DynamicChart } from './DynamicChart';
 
-interface GraphAreaProps {
+interface ChartControllerProps {
   checkboxData: CheckboxData[];
   compositionMap: Map<number, PopulationCompositionPerYear>;
   checkedPrefCodeList: number[];
 }
 
-export const GraphArea = ({
+export const ChartController = ({
   checkboxData,
   compositionMap,
   checkedPrefCodeList,
-}: GraphAreaProps) => {
+}: ChartControllerProps) => {
   const PopulationCompositionLabel = ['総人口', '年少人口', '生産年齢人口', '老年人口'] as const;
   const [selectedLabel, setSelectedLabel] =
     useState<(typeof PopulationCompositionLabel)[number]>('総人口');
