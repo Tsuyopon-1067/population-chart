@@ -3,14 +3,16 @@
   height: 300px;
   margin-top: 10px;
   border-top: 1px solid #ccc;
-  div {
-    display: flex;
-    justify-content: space-between;
-  }
 }
 
 .buttonArea {
   margin: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 4px;
+  @media screen and (min-width: 480px) {
+    gap: 8px;
+  }
 }
 
 .button {
@@ -21,6 +23,27 @@
   font-weight: bold;
   box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.4);
   transition: all 0.2s;
+
+  @media screen and (min-width: 380px) {
+    min-width: 72px;
+  }
+  @media screen and (min-width: 400px) {
+    min-width: 80px;
+  }
+  @media screen and (min-width: 420px) {
+    min-width: 88px;
+  }
+  @media screen and (min-width: 440px) {
+    min-width: 96px;
+    max-width: 128px;
+  }
+  @media screen and (min-width: 480px) {
+    min-width: 106px;
+  }
+  @media screen and (min-width: 500px) {
+    max-width: none;
+    flex: 1;
+  }
 }
 .button:hover {
   background: var(--button-hover-color);

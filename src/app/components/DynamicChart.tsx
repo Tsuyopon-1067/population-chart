@@ -1,5 +1,7 @@
 'use client';
 
+import styles from './DynamicChart.module.css';
+import { useWindowWidth } from '../hooks/useWindowWidth';
 import { GraphPopulationCompositionData } from '@/app/type/graphPopulationCompositionData';
 import { LineChartData } from '@/app/type/lineChartData';
 import {
@@ -18,6 +20,14 @@ interface DynamicChartProps {
 }
 
 export const DynamicChart = ({ data }: DynamicChartProps) => {
+  const windowWidth = useWindowWidth();
+
+  interface LegendLayout {
+    align: 'left' | 'right';
+    layout: 'horizontal' | 'vertical';
+    verticalAlign: 'top' | 'bottom';
+  }
+
   const getSelectedYearValue = (entry: GraphPopulationCompositionData, year: number) => {
     const selectedYearCompositionEntries = entry.data;
     const selectedYearCompositionEntry = selectedYearCompositionEntries.find(
@@ -46,15 +56,28 @@ export const DynamicChart = ({ data }: DynamicChartProps) => {
     });
   };
 
+  const getLegendLayout = (): LegendLayout => {
+    if (windowWidth < 480 || data.length >= 11) {
+      return { align: 'left', layout: 'horizontal', verticalAlign: 'bottom' };
+    }
+    return { align: 'right', layout: 'vertical', verticalAlign: 'top' };
+  };
+
   const convertedData = convertToGraphData(data);
+  const legendLayout = getLegendLayout();
   return (
     <ResponsiveContainer width='100%' height='100%'>
-      <LineChart data={convertedData} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+      <LineChart data={convertedData} margin={{ top: 5, right: 10, left: 20, bottom: 5 }}>
         <CartesianGrid strokeDasharray='3 3' />
         <XAxis dataKey='year' />
         <YAxis />
         <Tooltip />
-        <Legend align='left' layout='horizontal' />
+        <Legend
+          className={styles.legend}
+          align={legendLayout.align}
+          layout={legendLayout.layout}
+          verticalAlign={legendLayout.verticalAlign}
+        />
         {data.map((entry, key) => {
           const name = entry.name;
           const hue = (key / data.length) * 360;

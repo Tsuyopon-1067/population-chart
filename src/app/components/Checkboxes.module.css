@@ -1,12 +1,29 @@
 .mainDiv {
   max-width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   font-size: 18px;
   justify-content: space-between;
+
+  @media screen and (min-width: 420px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  @media screen and (min-width: 520px) {
+    grid-template-columns: repeat(5, 1fr);
+  }
+  @media screen and (min-width: 620px) {
+    grid-template-columns: repeat(6, 1fr);
+  }
+  @media screen and (min-width: 720px) {
+    grid-template-columns: repeat(7, 1fr);
+  }
 }
 
 .form {
   min-width: 5em;
   display: block;
+}
+
+.checkbox {
+  margin-right: 2px;
 }
