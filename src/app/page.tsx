@@ -11,7 +11,7 @@ import { usePopulationComposition } from './hooks/usePopulationComposition';
 export default function Home() {
   const [prefectures, setPrefectures] = useState<Prefecture[]>([]);
   const [checkStatus, setCheckStatus] = useState<CheckboxData[]>([]);
-  const [updateCheckState, compositionList] = usePopulationComposition();
+  const [updateCheckState, compositionMap, checkedPrefCodeList] = usePopulationComposition();
 
   useEffect(() => {
     fetch('/api/v1/prefectures')
@@ -38,8 +38,8 @@ export default function Home() {
         setCheckStatus={setCheckStatus}
         updateCheckState={updateCheckState}
       />
-      compositionList compositionList.length= {compositionList?.length}
-      {compositionList?.map((composition) => JSON.stringify(composition))}
+      compositionList compositionList.length= {checkedPrefCodeList?.length}
+      {checkedPrefCodeList?.map((key) => JSON.stringify(compositionMap.get(key)))}
       {JSON.stringify(checkStatus?.map((composition) => composition.checked))}
     </div>
   );
