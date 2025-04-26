@@ -50,3 +50,14 @@
   box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.4);
   cursor: pointer;
 }
+.button:disabled {
+  background: #ccc;
+  box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.2);
+  cursor: not-allowed;
+}
+
+.button:disabled:hover {
+  background: #ccc;
+  box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.2);
+  cursor: not-allowed;
+}

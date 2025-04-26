@@ -24,9 +24,7 @@ export const ChartController = ({
   const [selectedLabel, setSelectedLabel] =
     useState<(typeof PopulationCompositionLabel)[number]>('総人口');
 
-  if (!checkboxData || !compositionMap) {
-    return <div>Loading...</div>;
-  }
+  const isDisabled = !checkboxData || !compositionMap || checkedPrefCodeList.length === 0;
 
   const { selectedLabelLineData, selectedPrefNameList } = createSelectedLabelLineData(
     selectedLabel,
@@ -39,7 +37,12 @@ export const ChartController = ({
     <div className={styles.mainDiv}>
       <div className={styles.buttonArea}>
         {PopulationCompositionLabel.map((label, key) => (
-          <button className={styles.button} key={key} onClick={() => setSelectedLabel(label)}>
+          <button
+            className={styles.button}
+            key={key}
+            onClick={() => setSelectedLabel(label)}
+            disabled={isDisabled}
+          >
             {label}
           </button>
         ))}
