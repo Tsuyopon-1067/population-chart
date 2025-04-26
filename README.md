@@ -78,3 +78,30 @@ yarn ts-jest config:init
 
 ### map更新問題
 - ひたすらconsoleデバッグ．
+
+### Hooksの使用変更
+- 実装の参考
+    - [Map<K, V>](https://typescriptbook.jp/reference/builtin-api/map)
+
+### 選択されたlabelの値を持つ要素を配列から抽出
+- 実装の参考
+    - [JavaScriptで配列を検索する4つのメソッド](https://www.digitalocean.com/community/tutorials/js-array-search-methods-ja)
+
+### グラフ表示
+```bash
+yarn add recharts
+```
+- 実装の参考
+    - [LineChart](https://recharts.org/en-US/api/LineChart)
+    - 久しぶりにAI無しで実装できた
+
+### グラフのボタン
+- 型定義をunion型から配列に変更
+- ボタンのCSS実装
+- 実装の参考
+    - [TypeScript: 配列型からその要素のユニオン型を導出する方法。例えば、Array<A | B | C>からA | B | Cを導き出す。](https://qiita.com/suin/items/25588b2beba7a3fcce4f)
+    - [:hover](https://developer.mozilla.org/ja/docs/Web/CSS/:hover)
+    - [cursor](https://developer.mozilla.org/ja/docs/Web/CSS/cursor)
+    - [【CSS】hoverで作る簡単アニメーションとおすすめプロパティ6選](https://blog.codecamp.jp/css-hover-6)
+    - [ボックスシャドウ（box-shadow） ジェネレーター](https://front-end-tools.com/generateBoxshadow/)
+    - こちらもAI無し

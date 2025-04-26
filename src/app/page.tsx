@@ -2,16 +2,17 @@
 
 import { useEffect, useState } from 'react';
 import styles from './page.module.css';
-import { Prefecture } from '@/type/prefecture';
-import { PrefecturesResponse } from '@/type/prefecturesResponse';
+import { Prefecture } from '@/app/type/prefecture';
+import { PrefecturesResponse } from '@/app/type/prefecturesResponse';
 import { Checkboxes } from './components/Checkboxes';
-import { CheckboxData } from '@/type/checkboxData';
+import { CheckboxData } from '@/app/type/checkboxData';
 import { usePopulationComposition } from './hooks/usePopulationComposition';
+import { GraphArea } from './components/GraphArea';
 
 export default function Home() {
   const [prefectures, setPrefectures] = useState<Prefecture[]>([]);
   const [checkStatus, setCheckStatus] = useState<CheckboxData[]>([]);
-  const [updateCheckState, compositionList] = usePopulationComposition();
+  const [updateCheckState, compositionMap, checkedPrefCodeList] = usePopulationComposition();
 
   useEffect(() => {
     fetch('/api/v1/prefectures')
@@ -38,9 +39,11 @@ export default function Home() {
         setCheckStatus={setCheckStatus}
         updateCheckState={updateCheckState}
       />
-      compositionList compositionList.length= {compositionList?.length}
-      {compositionList?.map((composition) => JSON.stringify(composition))}
-      {JSON.stringify(checkStatus?.map((composition) => composition.checked))}
+      <GraphArea
+        checkboxData={checkStatus}
+        compositionMap={compositionMap}
+        checkedPrefCodeList={checkedPrefCodeList}
+      />
     </div>
   );
 }

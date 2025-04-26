@@ -3,6 +3,8 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --theme-color: #1876d2;
+  --button-hover-color: #1465c0;
 }
 
 @theme inline {

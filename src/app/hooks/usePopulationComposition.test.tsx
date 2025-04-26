@@ -1,8 +1,8 @@
-import { CheckboxData } from '@/type/checkboxData';
+import { CheckboxData } from '@/app/type/checkboxData';
 import { usePopulationComposition } from './usePopulationComposition';
 import { renderHook, act } from '@testing-library/react';
 import { waitFor } from '@testing-library/react';
-import { PopulationCompositionPerYearResponse } from '@/type/populationCompositionPerYearResponse';
+import { PopulationCompositionPerYearResponse } from '@/app/type/populationCompositionPerYearResponse';
 
 beforeEach(() => {
   global.fetch = jest.fn((url) => {
@@ -23,14 +23,16 @@ afterEach(() => {
 describe('usePopulationComposition', () => {
   test('add 1data', async () => {
     const { result } = renderHook(() => usePopulationComposition());
-    const [updateCheckState, _1] = result.current;
+    const [updateCheckState, _11, _12] = result.current;
     act(() => {
       updateCheckState(1, checkboxData);
     });
     await waitFor(() => {
-      const [_2, compositionList] = result.current;
-      expect(compositionList?.length).toBe(1);
-      const firstElement = compositionList?.[0];
+      const [_20, compositionMap, checkedPrefCodeList] = result.current;
+      expect(compositionMap?.size).toBe(1);
+      expect(compareArrays(checkedPrefCodeList, [1])).toBe(true);
+      const key = checkedPrefCodeList[0];
+      const firstElement = compositionMap?.get(key);
       expect(firstElement?.boundaryYear).toBe(2020);
       expect(firstElement?.data[0].data[0].year).toBe(1960);
       expect(firstElement?.data[0].data[0].value).toBe(5039206);
@@ -39,34 +41,60 @@ describe('usePopulationComposition', () => {
 
   test('add and delete data', async () => {
     const { result } = renderHook(() => usePopulationComposition());
-    const [updateCheckState, _1] = result.current;
-    act(() => {
-      updateCheckState(1, checkboxData);
-      checkboxData[2].checked = true;
-      updateCheckState(3, checkboxData);
+
+    await act(async () => {
+      // result.current[0] = updateCheckState
+      await result.current[0](1, checkboxData);
     });
     await waitFor(() => {
-      const [_2, compositionList] = result.current;
-      expect(compositionList?.length).toBe(2);
-      const secondElement = compositionList?.[1];
+      checkboxData[2].checked = true;
+    });
+    await act(async () => {
+      // result.current[0] = updateCheckState
+      await result.current[0](3, checkboxData);
+    });
+
+    await waitFor(() => {
+      const [_, compositionMap, checkedPrefCodeList] = result.current;
+      expect(compositionMap?.size).toBe(2);
+      expect(compareArrays(checkedPrefCodeList, [1, 3])).toBe(true);
+
+      const key = checkedPrefCodeList[1];
+      const secondElement = compositionMap?.get(key);
       expect(secondElement?.boundaryYear).toBe(2020);
       expect(secondElement?.data[0].data[1].year).toBe(1965);
       expect(secondElement?.data[0].data[1].value).toBe(1411118);
     });
-    act(() => {
+    await act(async () => {
+      // result.current[0] = updateCheckState
       checkboxData[2].checked = false;
-      updateCheckState(1, checkboxData);
+      await result.current[0](1, checkboxData);
     });
     await waitFor(() => {
-      const [_2, compositionList] = result.current;
-      expect(compositionList?.length).toBe(1);
-      const firstElement = compositionList?.[0];
+      const [_, compositionMap, checkedPrefCodeList] = result.current;
+      expect(compositionMap?.size).toBe(2);
+      expect(compareArrays(checkedPrefCodeList, [1])).toBe(true);
+
+      const key = checkedPrefCodeList[0];
+      const firstElement = compositionMap?.get(key);
       expect(firstElement?.boundaryYear).toBe(2020);
       expect(firstElement?.data[0].data[0].year).toBe(1960);
       expect(firstElement?.data[0].data[0].value).toBe(5039206);
     });
   });
 });
+
+const compareArrays = (a: number[], b: number[]) => {
+  if (a.length !== b.length) {
+    return false;
+  }
+  for (let i = 0; i < a.length; i++) {
+    if (a[i] !== b[i]) {
+      return false;
+    }
+  }
+  return true;
+};
 
 const checkboxData: CheckboxData[] = [
   {

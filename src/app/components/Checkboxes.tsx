@@ -1,8 +1,8 @@
 'use client';
 
-import { Prefecture } from '@/type/prefecture';
+import { Prefecture } from '@/app/type/prefecture';
 import styles from './Checkboxes.module.css';
-import { CheckboxData } from '@/type/checkboxData';
+import { CheckboxData } from '@/app/type/checkboxData';
 
 interface CheckboxesProps {
   prefectures?: Prefecture[];

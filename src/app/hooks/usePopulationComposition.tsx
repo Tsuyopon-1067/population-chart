@@ -1,51 +1,61 @@
 'use client';
 
-import { CheckboxData } from '@/type/checkboxData';
-import { PopulationCompositionPerYear } from '@/type/populationCompositionPerYear';
-import { PopulationCompositionPerYearResponse } from '@/type/populationCompositionPerYearResponse';
-import { useMemo, useState } from 'react';
+import { CheckboxData } from '@/app/type/checkboxData';
+import { PopulationCompositionPerYear } from '@/app/type/populationCompositionPerYear';
+import { PopulationCompositionPerYearResponse } from '@/app/type/populationCompositionPerYearResponse';
+import { useState } from 'react';
 
 export const usePopulationComposition = (): [
   (prefCode: number, checkboxData: CheckboxData[]) => Promise<void>,
-  PopulationCompositionPerYear[] | undefined,
+  Map<number, PopulationCompositionPerYear>,
+  number[],
 ] => {
-  const compositionCache = useMemo(() => new Map<number, PopulationCompositionPerYear>(), []);
-  const [compositionList, setCompositionList] = useState<PopulationCompositionPerYear[]>([]);
+  const [compositionMap, setCompositionMap] = useState<Map<number, PopulationCompositionPerYear>>(
+    () => new Map<number, PopulationCompositionPerYear>(),
+  );
+  const [checkedPrefCodeList, setCheckedPrefCodeList] = useState<number[]>([]);
 
-  const fetchPopulationComposition = async (prefCode: number) => {
-    await fetch(`/api/v1/population/composition/perYear?prefCode=${prefCode}`)
+  const fetchPopulationComposition = async (
+    prefCode: number,
+  ): Promise<PopulationCompositionPerYear> => {
+    return fetch(`/api/v1/population/composition/perYear?prefCode=${prefCode}`)
       .then((response) => response.json())
       .then((data) => {
         const response = data as PopulationCompositionPerYearResponse;
-        compositionCache.set(prefCode, response.result);
+        return response.result;
       })
-      .catch((error) => console.error('Error fetching population composition data:', error));
+      .catch((error) => {
+        console.error('Error fetching population composition data:', error);
+        throw error;
+      });
   };
 
-  const updateCache = async (prefCode: number) => {
-    if (!compositionCache.has(prefCode)) {
-      await fetchPopulationComposition(prefCode);
+  const updateCompositionMap = async (prefCode: number) => {
+    if (compositionMap.has(prefCode)) {
+      return;
     }
+    await fetchPopulationComposition(prefCode).then((response) => {
+      const newCompositionMap = new Map(compositionMap);
+      newCompositionMap.set(prefCode, response);
+      setCompositionMap(newCompositionMap);
+    });
   };
 
-  const createNewCompositionList = (
-    checkboxData: CheckboxData[],
-  ): PopulationCompositionPerYear[] => {
-    return checkboxData
+  const updateCheckedPrefCodeList = async (checkboxData: CheckboxData[]) => {
+    const newCheckedPrefCodeList = checkboxData
       .map((data) => {
         if (data.checked) {
-          const composition = compositionCache.get(data.prefCode);
-          return composition as PopulationCompositionPerYear;
+          return data.prefCode;
         }
       })
       .filter((item) => item !== null && item !== undefined);
+    setCheckedPrefCodeList(newCheckedPrefCodeList);
   };
 
   const updateCheckState = async (prefCode: number, checkboxData: CheckboxData[]) => {
-    await updateCache(prefCode);
-    const newCompositionList = createNewCompositionList(checkboxData);
-    setCompositionList(newCompositionList);
+    await updateCompositionMap(prefCode);
+    updateCheckedPrefCodeList(checkboxData);
   };
 
-  return [updateCheckState, compositionList];
+  return [updateCheckState, compositionMap, checkedPrefCodeList];
 };
