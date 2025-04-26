@@ -1,5 +1,5 @@
-import { PopulationCompositionPerYearResponse } from '@/app/type/populationCompositionPerYearResponse';
-import { PrefecturesResponse } from '@/app/type/prefecturesResponse';
+import { PopulationCompositionPerYearResponse } from '../type/populationCompositionPerYearResponse';
+import { PrefecturesResponse } from '../type/prefecturesResponse';
 
 export const fetchHelper = async (
   resource: string,
@@ -7,17 +7,18 @@ export const fetchHelper = async (
   const API_KEY = process.env.YUMEMI_API_KEY;
   const BASE_URL = 'https://yumemi-frontend-engineer-codecheck-api.vercel.app';
 
-  try {
-    const response = await fetch(`${BASE_URL}${resource}`, {
-      method: 'GET',
-      headers: {
-        'X-API-KEY': API_KEY || '',
-      },
+  return await fetch(`${BASE_URL}${resource}`, {
+    method: 'GET',
+    headers: {
+      'X-API-KEY': API_KEY || '',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      return data;
+    })
+    .catch((error) => {
+      console.error(`Error fetching data from ${resource}:`, error);
+      throw error;
     });
-
-    return await response.json();
-  } catch (error) {
-    console.error(`Error fetching data from ${resource}:`, error);
-    throw error;
-  }
 };
