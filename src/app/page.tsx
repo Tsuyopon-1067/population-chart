@@ -8,6 +8,7 @@ import { Checkboxes } from './components/Checkboxes';
 import { CheckboxData } from '@/app/type/checkboxData';
 import { usePopulationComposition } from './hooks/usePopulationComposition';
 import { ChartController } from './components/ChartController';
+import { fetchHelper } from './lib/fetchHelper';
 
 export default function Home() {
   const [prefectures, setPrefectures] = useState<Prefecture[]>([]);
@@ -15,8 +16,7 @@ export default function Home() {
   const [updateCheckState, compositionMap, checkedPrefCodeList] = usePopulationComposition();
 
   useEffect(() => {
-    fetch('/api/v1/prefectures')
-      .then((response) => response.json())
+    fetchHelper('/api/v1/prefectures')
       .then((data) => {
         const response = data as PrefecturesResponse;
         setPrefectures(response.result);
