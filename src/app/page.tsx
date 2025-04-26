@@ -32,7 +32,6 @@ export default function Home() {
 
   return (
     <div className={styles.mainDiv}>
-      <h2>都道府県</h2>
       <Checkboxes
         prefectures={prefectures}
         checkStatus={checkStatus}
