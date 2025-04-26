@@ -45,3 +45,17 @@ npx husky-init
 - 実装の参考
     - [日本語対応！CSS Flexboxのチートシートを作ったので配布します](https://www.webcreatorbox.com/blog/css-flexbox-cheat-sheet)
         - Flexでは最後の配置が不自然になるためCSS Gridに以降
+
+### 人口構成取得Hooksの実装
+- 実装の参考
+    - [型ガード](https://typescript-jp.gitbook.io/deep-dive/type-system/typeguard)
+    - [TypeScriptの型と実態がズレるとき、型付けにどう向き合っていくか](https://zenn.dev/mybest_dev/articles/82ef8c34dfd1b7)
+    - Mapからの配列生成で調べたが実際には必要なかった
+
+### Hooksのテスト
+```bash
+yarn add -D @testing-library/react
+yarn add -D jest
+yarn add -D @types/jest
+```
+- [【React】カスタムフックのテストはこんな感じに書くといいよ](https://qiita.com/anneau/items/c3a1779ba228b23d0956)
