@@ -1,14 +1,16 @@
+'use client';
+
 import { CheckboxData } from '@/type/checkboxData';
 import { PopulationCompositionPerYear } from '@/type/populationCompositionPerYear';
 import { PopulationCompositionPerYearResponse } from '@/type/populationCompositionPerYearResponse';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 export const usePopulationComposition = (): [
   (prefCode: number, checkboxData: CheckboxData[]) => Promise<void>,
   PopulationCompositionPerYear[] | undefined,
 ] => {
-  const compositionCache = new Map<number, PopulationCompositionPerYear>();
-  const [compositionList, setCompositionList] = useState<PopulationCompositionPerYear[]>();
+  const compositionCache = useMemo(() => new Map<number, PopulationCompositionPerYear>(), []);
+  const [compositionList, setCompositionList] = useState<PopulationCompositionPerYear[]>([]);
 
   const fetchPopulationComposition = async (prefCode: number) => {
     await fetch(`/api/v1/population/composition/perYear?prefCode=${prefCode}`)

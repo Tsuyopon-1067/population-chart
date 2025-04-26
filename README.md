@@ -75,3 +75,6 @@ yarn ts-jest config:init
     - [React Hooksでテストをゴリゴリ書きたい - react-reduxやaxiosが使われているような場合もゴリゴリテストを書きたい](https://zenn.dev/bom_shibuya/articles/5c3ae7745c5e94)
 - メモ
     - `map`に登録した値が永遠に`undefined`だった．諦めてAIに聞いたら`Promise`が～と言っていたので試しに`fetch`に`await`をつけたら解決．
+
+### map更新問題
+- ひたすらconsoleデバッグ．

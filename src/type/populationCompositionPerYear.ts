@@ -6,7 +6,7 @@ export interface PopulationCompositionPerYear {
       data: {
         year: number;
         value: number;
-        rate: number;
+        rate?: number;
       }[];
     },
   ];
