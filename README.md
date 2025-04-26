@@ -105,3 +105,10 @@ yarn add recharts
     - [【CSS】hoverで作る簡単アニメーションとおすすめプロパティ6選](https://blog.codecamp.jp/css-hover-6)
     - [ボックスシャドウ（box-shadow） ジェネレーター](https://front-end-tools.com/generateBoxshadow/)
     - こちらもAI無し
+
+### レスポンシブ対応
+- useWidthを追加
+- グラフはかなり汚い実装
+
+- 実装の参考
+    - [Reactでブラウザの横幅を取得する](https://qiita.com/koji0705/items/b87601540c306290ca27)
