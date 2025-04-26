@@ -1,0 +1,63 @@
+.mainDiv {
+  h2 {
+    display: block;
+    font-size: 24px;
+    font-weight: bold;
+  }
+}
+
+.checkboxArea {
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  font-size: 18px;
+  justify-content: space-between;
+
+  @media screen and (min-width: 420px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  @media screen and (min-width: 520px) {
+    grid-template-columns: repeat(5, 1fr);
+  }
+  @media screen and (min-width: 620px) {
+    grid-template-columns: repeat(6, 1fr);
+  }
+  @media screen and (min-width: 720px) {
+    grid-template-columns: repeat(7, 1fr);
+  }
+}
+
+.form {
+  min-width: 5em;
+  display: block;
+}
+
+.checkbox {
+  margin-right: 2px;
+}
+
+.loading {
+  background-color: #fefefe;
+  width: 100%;
+  height: 432px;
+  display: grid;
+  place-items: center;
+  p {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  @media screen and (min-width: 420px) {
+    height: 360;
+  }
+  @media screen and (min-width: 520px) {
+    height: 306;
+  }
+  @media screen and (min-width: 620px) {
+    height: 252;
+  }
+  @media screen and (min-width: 720px) {
+    height: 225;
+  }
+}
