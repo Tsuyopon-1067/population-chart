@@ -38,7 +38,24 @@ export const DynamicChart = ({ data, prefNameList }: DynamicChartProps) => {
     return { align: 'right', layout: 'vertical', verticalAlign: 'top' };
   };
 
+  const createColors = () => {
+    const colors1 = [...Array(16)].map((_, i) => {
+      const hue = (i / 16) * 360;
+      return `hsl(${hue}, 90%, 40%)`;
+    });
+    const colors2 = [...Array(16)].map((_, i) => {
+      const hue = (i / 16) * 360;
+      return `hsl(${hue}, 30%, 50%)`;
+    });
+    const colors3 = [...Array(16)].map((_, i) => {
+      const hue = (i / 16) * 360;
+      return `hsl(${hue}, 100%, 30%)`;
+    });
+    return [...colors1, ...colors2, ...colors3];
+  };
+
   const legendLayout = getLegendLayout();
+  const colors = createColors();
   return (
     <ResponsiveContainer width='100%' height='100%'>
       <LineChart data={data} margin={{ top: 5, right: 10, left: 20, bottom: 5 }}>
@@ -53,9 +70,7 @@ export const DynamicChart = ({ data, prefNameList }: DynamicChartProps) => {
           verticalAlign={legendLayout.verticalAlign}
         />
         {prefNameList.map((name, key) => {
-          const hue = (key / data.length) * 360;
-          const color = 'hsl(' + hue + ', 100%, 50%)';
-          return <Line key={key} type='monotone' dataKey={name} stroke={color} />;
+          return <Line key={key} type='monotone' dataKey={name} stroke={colors[key]} />;
         })}
       </LineChart>
     </ResponsiveContainer>
