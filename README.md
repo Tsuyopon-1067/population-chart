@@ -86,3 +86,11 @@ yarn ts-jest config:init
 ### 選択されたlabelの値を持つ要素を配列から抽出
 - 実装の参考
     - [JavaScriptで配列を検索する4つのメソッド](https://www.digitalocean.com/community/tutorials/js-array-search-methods-ja)
+
+### グラフ表示
+```bash
+yarn add recharts
+```
+- 実装の参考
+    - [LineChart](https://recharts.org/en-US/api/LineChart)
+    - 久しぶりにAI無しで実装できた

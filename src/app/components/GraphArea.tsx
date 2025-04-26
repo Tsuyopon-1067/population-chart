@@ -1,11 +1,13 @@
 'use client';
 
+import styles from './GraphArea.module.css';
 import { CheckboxData } from '@/type/checkboxData';
 import { GraphPopulationCompositionData } from '@/type/graphPopulationCompositionData';
 import { PopulationCompositionEntry } from '@/type/populationCompositionEntry';
 import { PopulationCompositionLabel } from '@/type/populationCompositionLabel';
 import { PopulationCompositionPerYear } from '@/type/populationCompositionPerYear';
 import { useState } from 'react';
+import { DynamicChart } from './DynamicChart';
 
 interface GraphAreaProps {
   checkboxData: CheckboxData[];
@@ -43,5 +45,9 @@ export const GraphArea = ({
     };
   });
 
-  return <div>{JSON.stringify(displayedData)}</div>;
+  return (
+    <div className={styles.mainDiv}>
+      <DynamicChart data={displayedData} />
+    </div>
+  );
 };
