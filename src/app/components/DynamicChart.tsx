@@ -2,7 +2,6 @@
 
 import styles from './DynamicChart.module.css';
 import { useWindowWidth } from '../hooks/useWindowWidth';
-import { GraphPopulationCompositionData } from '@/app/type/graphPopulationCompositionData';
 import { LineChartData } from '@/app/type/lineChartData';
 import {
   LineChart,
@@ -16,45 +15,21 @@ import {
 } from 'recharts';
 
 interface DynamicChartProps {
-  data: GraphPopulationCompositionData[];
+  data: LineChartData[];
+  prefNameList: string[];
 }
 
-export const DynamicChart = ({ data }: DynamicChartProps) => {
+export const DynamicChart = ({ data, prefNameList }: DynamicChartProps) => {
   const windowWidth = useWindowWidth();
+  if (prefNameList.length === 0) {
+    return;
+  }
 
   interface LegendLayout {
     align: 'left' | 'right';
     layout: 'horizontal' | 'vertical';
     verticalAlign: 'top' | 'bottom';
   }
-
-  const getSelectedYearValue = (entry: GraphPopulationCompositionData, year: number) => {
-    const selectedYearCompositionEntries = entry.data;
-    const selectedYearCompositionEntry = selectedYearCompositionEntries.find(
-      (compositionEntry) => compositionEntry.year === year,
-    );
-    return selectedYearCompositionEntry?.value;
-  };
-
-  const convertToGraphData = (data: GraphPopulationCompositionData[]) => {
-    if (!data || data.length === 0) {
-      return [];
-    }
-    const years = data[0].data.map((entry) => entry.year);
-    return years.map((year) => {
-      const oneYearData: LineChartData = {};
-
-      const xAxisLabel = year.toString();
-      oneYearData['year'] = xAxisLabel;
-
-      data.forEach((entry) => {
-        const prefName = entry.name;
-        const value = getSelectedYearValue(entry, year);
-        oneYearData[prefName] = value;
-      });
-      return oneYearData;
-    });
-  };
 
   const getLegendLayout = (): LegendLayout => {
     if (windowWidth < 480 || data.length >= 11) {
@@ -63,11 +38,10 @@ export const DynamicChart = ({ data }: DynamicChartProps) => {
     return { align: 'right', layout: 'vertical', verticalAlign: 'top' };
   };
 
-  const convertedData = convertToGraphData(data);
   const legendLayout = getLegendLayout();
   return (
     <ResponsiveContainer width='100%' height='100%'>
-      <LineChart data={convertedData} margin={{ top: 5, right: 10, left: 20, bottom: 5 }}>
+      <LineChart data={data} margin={{ top: 5, right: 10, left: 20, bottom: 5 }}>
         <CartesianGrid strokeDasharray='3 3' />
         <XAxis dataKey='year' />
         <YAxis />
@@ -78,8 +52,7 @@ export const DynamicChart = ({ data }: DynamicChartProps) => {
           layout={legendLayout.layout}
           verticalAlign={legendLayout.verticalAlign}
         />
-        {data.map((entry, key) => {
-          const name = entry.name;
+        {prefNameList.map((name, key) => {
           const hue = (key / data.length) * 360;
           const color = 'hsl(' + hue + ', 100%, 50%)';
           return <Line key={key} type='monotone' dataKey={name} stroke={color} />;
