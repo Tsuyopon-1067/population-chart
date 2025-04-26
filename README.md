@@ -82,3 +82,7 @@ yarn ts-jest config:init
 ### Hooksの使用変更
 - 実装の参考
     - [Map<K, V>](https://typescriptbook.jp/reference/builtin-api/map)
+
+### 選択されたlabelの値を持つ要素を配列から抽出
+- 実装の参考
+    - [JavaScriptで配列を検索する4つのメソッド](https://www.digitalocean.com/community/tutorials/js-array-search-methods-ja)

@@ -7,6 +7,7 @@ import { PrefecturesResponse } from '@/type/prefecturesResponse';
 import { Checkboxes } from './components/Checkboxes';
 import { CheckboxData } from '@/type/checkboxData';
 import { usePopulationComposition } from './hooks/usePopulationComposition';
+import { GraphArea } from './components/GraphArea';
 
 export default function Home() {
   const [prefectures, setPrefectures] = useState<Prefecture[]>([]);
@@ -38,9 +39,11 @@ export default function Home() {
         setCheckStatus={setCheckStatus}
         updateCheckState={updateCheckState}
       />
-      compositionList compositionList.length= {checkedPrefCodeList?.length}
-      {checkedPrefCodeList?.map((key) => JSON.stringify(compositionMap.get(key)))}
-      {JSON.stringify(checkStatus?.map((composition) => composition.checked))}
+      <GraphArea
+        checkboxData={checkStatus}
+        compositionMap={compositionMap}
+        checkedPrefCodeList={checkedPrefCodeList}
+      />
     </div>
   );
 }
