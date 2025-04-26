@@ -78,3 +78,7 @@ yarn ts-jest config:init
 
 ### map更新問題
 - ひたすらconsoleデバッグ．
+
+### Hooksの使用変更
+- 実装の参考
+    - [Map<K, V>](https://typescriptbook.jp/reference/builtin-api/map)
