@@ -6,11 +6,13 @@ import { PopulationCompositionPerYearResponse } from '@/app/type/populationCompo
 import { useState } from 'react';
 import { fetchHelper } from '../lib/fetchHelper';
 
-export const usePopulationComposition = (): [
+type UsePopulationCompositionReturnType = [
   (prefCode: number, checkboxData: CheckboxData[]) => Promise<void>,
   Map<number, PopulationCompositionPerYear>,
   number[],
-] => {
+];
+
+export const usePopulationComposition = (): UsePopulationCompositionReturnType => {
   const [compositionMap, setCompositionMap] = useState<Map<number, PopulationCompositionPerYear>>(
     () => new Map<number, PopulationCompositionPerYear>(),
   );
