@@ -16,7 +16,7 @@
 ## デプロイ
 Vercelでデプロイしています．
 
-https://population-chart-kulthe85o-tsuyopon1067s-projects.vercel.app/
+https://population-chart-one.vercel.app/
 
 ## 仕様
 ### コンポーネント・Hooks・型定義
