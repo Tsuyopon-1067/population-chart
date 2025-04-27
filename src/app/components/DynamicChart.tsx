@@ -32,7 +32,7 @@ export const DynamicChart = ({ data, prefNameList }: DynamicChartProps) => {
   }
 
   const getLegendLayout = (): LegendLayout => {
-    if (windowWidth < 480 || data.length >= 11) {
+    if (windowWidth < 480 || prefNameList.length >= 11) {
       return { align: 'left', layout: 'horizontal', verticalAlign: 'bottom' };
     }
     return { align: 'right', layout: 'vertical', verticalAlign: 'top' };
