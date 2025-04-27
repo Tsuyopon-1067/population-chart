@@ -3,13 +3,16 @@ import { CheckboxData } from '../type/checkboxData';
 import {
   createSelectedCompositionDataList,
   createSelectedLabelLineData,
-  createSelectedPrefNameList,
+  createSelectedPrefList,
 } from './ChartController';
 
 describe('ChartController', () => {
-  test('createSelectedPrefNameList', async () => {
-    const actual = createSelectedPrefNameList([1, 3], checkboxData);
-    expect(compareArrays(actual, ['北海道', '岩手県'])).toBe(true);
+  test('createSelectedPrefList', async () => {
+    const actual = createSelectedPrefList([1, 3], checkboxData);
+    expect(actual[0].prefName).toBe('北海道');
+    expect(actual[1].prefName).toBe('岩手県');
+    expect(actual[0].prefCode).toBe(1);
+    expect(actual[1].prefCode).toBe(3);
   });
 
   test('createSelectedCompositionDataList', async () => {
@@ -21,7 +24,7 @@ describe('ChartController', () => {
   });
 
   test('createSelectedLabelLineData', async () => {
-    const { selectedLabelLineData, selectedPrefNameList } = createSelectedLabelLineData(
+    const { selectedLabelLineData, selectedPrefList } = createSelectedLabelLineData(
       '年少人口',
       [1, 3],
       compositionMapMock,
@@ -33,8 +36,10 @@ describe('ChartController', () => {
     expect(selectedLabelLineData[1]['year']).toBe('1965');
     expect(selectedLabelLineData[1]['北海道']).toBe(1462123);
     expect(selectedLabelLineData[1]['岩手県']).toBe(429521);
-    expect(selectedPrefNameList[0]).toBe('北海道');
-    expect(selectedPrefNameList[1]).toBe('岩手県');
+    expect(selectedPrefList[0].prefName).toBe('北海道');
+    expect(selectedPrefList[1].prefName).toBe('岩手県');
+    expect(selectedPrefList[0].prefCode).toBe(1);
+    expect(selectedPrefList[1].prefCode).toBe(3);
   });
 });
 
@@ -55,15 +60,3 @@ const checkboxData: CheckboxData[] = [
     checked: true,
   },
 ];
-
-const compareArrays = <T,>(a: T[], b: T[]) => {
-  if (a.length !== b.length) {
-    return false;
-  }
-  for (let i = 0; i < a.length; i++) {
-    if (a[i] !== b[i]) {
-      return false;
-    }
-  }
-  return true;
-};
