@@ -7,6 +7,7 @@ import { PopulationCompositionPerYear } from '@/app/type/populationCompositionPe
 import { useState } from 'react';
 import { DynamicChart } from './DynamicChart';
 import { LineChartData } from '../type/lineChartData';
+import { Prefecture } from '../type/prefecture';
 
 interface ChartControllerProps {
   checkboxData: CheckboxData[];
@@ -26,7 +27,7 @@ export const ChartController = ({
 
   const isDisabled = !checkboxData || !compositionMap || checkedPrefCodeList.length === 0;
 
-  const { selectedLabelLineData, selectedPrefNameList } = createSelectedLabelLineData(
+  const { selectedLabelLineData, selectedPrefList } = createSelectedLabelLineData(
     selectedLabel,
     checkedPrefCodeList,
     compositionMap,
@@ -55,18 +56,18 @@ export const ChartController = ({
           </button>
         ))}
       </div>
-      <DynamicChart data={selectedLabelLineData} prefNameList={selectedPrefNameList} />
+      <DynamicChart data={selectedLabelLineData} prefList={selectedPrefList} />
     </div>
   );
 };
 
-export const createSelectedPrefNameList = (
+export const createSelectedPrefList = (
   checkedPrefCodeList: number[],
   checkboxData: CheckboxData[],
-): string[] => {
+): Prefecture[] => {
   return checkedPrefCodeList.map((prefCode) => {
     const prefName = checkboxData.find((item) => item.prefCode === prefCode)?.prefName || '';
-    return prefName;
+    return { prefName: prefName, prefCode };
   });
 };
 
@@ -89,11 +90,11 @@ export const createSelectedLabelLineData = (
   checkedPrefCodeList: number[],
   compositionMap: Map<number, PopulationCompositionPerYear>,
   checkboxData: CheckboxData[],
-): { selectedLabelLineData: LineChartData[]; selectedPrefNameList: string[] } => {
+): { selectedLabelLineData: LineChartData[]; selectedPrefList: Prefecture[] } => {
   if (checkedPrefCodeList.length === 0) {
-    return { selectedLabelLineData: [], selectedPrefNameList: [] };
+    return { selectedLabelLineData: [], selectedPrefList: [] };
   }
-  const selectedPrefNameList = createSelectedPrefNameList(checkedPrefCodeList, checkboxData);
+  const selectedPrefList = createSelectedPrefList(checkedPrefCodeList, checkboxData);
   const selectedCompositionDataList = createSelectedCompositionDataList(
     selectedLabel,
     checkedPrefCodeList,
@@ -106,11 +107,11 @@ export const createSelectedLabelLineData = (
     const xAxisLabel = year.toString();
     oneYearSelectedLabelLineData['year'] = xAxisLabel;
 
-    selectedPrefNameList.forEach((prefName, prefIndex) => {
+    selectedPrefList.forEach((pref, prefIndex) => {
       const entry = selectedCompositionDataList[prefIndex][yearIndex];
-      oneYearSelectedLabelLineData[prefName] = entry.value;
+      oneYearSelectedLabelLineData[pref.prefName] = entry.value;
     });
     return oneYearSelectedLabelLineData;
   });
-  return { selectedLabelLineData, selectedPrefNameList };
+  return { selectedLabelLineData, selectedPrefList };
 };

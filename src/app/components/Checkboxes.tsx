@@ -1,23 +1,16 @@
 'use client';
 
-import { Prefecture } from '@/app/type/prefecture';
 import styles from './Checkboxes.module.css';
 import { CheckboxData } from '@/app/type/checkboxData';
 
 interface CheckboxesProps {
-  prefectures?: Prefecture[];
   checkStatus?: CheckboxData[];
   setCheckStatus: (status: CheckboxData[]) => void;
-  updateCheckState(prefCode: number, checkboxData: CheckboxData[]): void;
+  updateCheckState: (prefCode: number, checkboxData: CheckboxData[]) => void;
 }
 
-export const Checkboxes = ({
-  prefectures,
-  checkStatus,
-  setCheckStatus,
-  updateCheckState,
-}: CheckboxesProps) => {
-  if (!prefectures || !checkStatus || prefectures.length === 0) {
+export const Checkboxes = ({ checkStatus, setCheckStatus, updateCheckState }: CheckboxesProps) => {
+  if (!checkStatus || checkStatus.length === 0) {
     return (
       <div className={styles.loading}>
         <p>Loading...</p>
@@ -28,21 +21,21 @@ export const Checkboxes = ({
     <div className={styles.mainDiv}>
       <h2>都道府県</h2>
       <div className={styles.checkboxArea}>
-        {prefectures.map((prefecture, key) => (
+        {checkStatus.map((state, key) => (
           <form className={styles.form} key={key}>
             <input
               className={styles.checkbox}
               type='checkbox'
-              value={prefecture.prefCode}
-              checked={checkStatus[key].checked}
+              value={state.prefCode}
+              checked={state.checked}
               onChange={() => {
                 const newCheckStatus = [...checkStatus];
                 newCheckStatus[key].checked = !newCheckStatus[key].checked;
                 setCheckStatus(newCheckStatus);
-                updateCheckState(prefecture.prefCode, newCheckStatus);
+                updateCheckState(state.prefCode, newCheckStatus);
               }}
             />
-            <label>{prefecture.prefName}</label>
+            <label>{state.prefName}</label>
           </form>
         ))}
       </div>

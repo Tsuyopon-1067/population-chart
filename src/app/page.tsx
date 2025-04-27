@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import styles from './page.module.css';
-import { Prefecture } from '@/app/type/prefecture';
 import { PrefecturesResponse } from '@/app/type/prefecturesResponse';
 import { Checkboxes } from './components/Checkboxes';
 import { CheckboxData } from '@/app/type/checkboxData';
@@ -11,7 +10,6 @@ import { ChartController } from './components/ChartController';
 import { fetchHelper } from './lib/fetchHelper';
 
 export default function Home() {
-  const [prefectures, setPrefectures] = useState<Prefecture[]>([]);
   const [checkStatus, setCheckStatus] = useState<CheckboxData[]>([]);
   const [updateCheckState, compositionMap, checkedPrefCodeList] = usePopulationComposition();
 
@@ -19,7 +17,6 @@ export default function Home() {
     fetchHelper('/api/v1/prefectures')
       .then((data) => {
         const response = data as PrefecturesResponse;
-        setPrefectures(response.result);
         const checkboxData: CheckboxData[] = response.result.map((prefecture) => ({
           prefCode: prefecture.prefCode,
           prefName: prefecture.prefName,
@@ -33,7 +30,6 @@ export default function Home() {
   return (
     <div className={styles.mainDiv}>
       <Checkboxes
-        prefectures={prefectures}
         checkStatus={checkStatus}
         setCheckStatus={setCheckStatus}
         updateCheckState={updateCheckState}
