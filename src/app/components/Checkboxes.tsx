@@ -6,7 +6,7 @@ import { CheckboxData } from '@/app/type/checkboxData';
 interface CheckboxesProps {
   checkStatus?: CheckboxData[];
   setCheckStatus: (status: CheckboxData[]) => void;
-  updateCheckState(prefCode: number, checkboxData: CheckboxData[]): void;
+  updateCheckState: (prefCode: number, checkboxData: CheckboxData[]) => void;
 }
 
 export const Checkboxes = ({ checkStatus, setCheckStatus, updateCheckState }: CheckboxesProps) => {
