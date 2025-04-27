@@ -37,8 +37,7 @@
 
 | 名前               | 型                                                         | 説明                                 |
 | ------------------ | ---------------------------------------------------------- | ------------------------------------ |
-| `prefectures?`     | `Prefecture[]`                                             | 都道府県一覧                         |
-| `checkStatus?`     | `: CheckboxData[]`                                         | チェックボックスの状態               |
+| `checkStatus?`     | `: CheckboxData[]`                                         | 都道府県情報とチェックボックスの状態 |
 | `setCheckStatus`   | `(status: CheckboxData[]) => void`                         | チェックボックスの更新更新           |
 | `updateCheckState` | `(prefCode: number, checkboxData: CheckboxData[]) => void` | 選択情報更新と人口構成データフェッチ |
 
@@ -46,7 +45,6 @@
 
 ```tsx
 <Checkboxes
-  prefectures={prefectures}
   checkStatus={checkStatus}
   setCheckStatus={setCheckStatus}
   updateCheckState={updateCheckState}
