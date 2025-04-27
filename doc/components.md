@@ -105,6 +105,14 @@
 
 なし
 
+#### 戻り値
+
+| 型                                                                  | 説明                                                                               |
+| ------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `(prefCode: number, checkboxData: CheckboxData[]) => Promise<void>` | チェックボックスを変更したときに呼び出される関数．選択状態とキャッシュを更新する． |
+| `Map<number, PopulationCompositionPerYear>`                         | <`prefCode`, `PopulationCompositionPerYear`>                                       |
+| `number[]`                                                          | 選択されている都道府県の`prefCode`                                                 |
+
 #### 使用例
 
 ```tsx
@@ -122,6 +130,12 @@ const [updateCheckState, compositionMap, checkedPrefCodeList] = usePopulationCom
 #### props
 
 なし
+
+#### 戻り値
+
+| 型            | 説明               |
+| ------------- | ------------------ |
+| `windowWidth` | ウィンドウの幅`px` |
 
 #### 使用例
 
