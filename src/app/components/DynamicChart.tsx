@@ -13,15 +13,16 @@ import {
   Line,
   ResponsiveContainer,
 } from 'recharts';
+import { Prefecture } from '../type/prefecture';
 
 interface DynamicChartProps {
   data: LineChartData[];
-  prefNameList: string[];
+  prefList: Prefecture[];
 }
 
-export const DynamicChart = ({ data, prefNameList }: DynamicChartProps) => {
+export const DynamicChart = ({ data, prefList }: DynamicChartProps) => {
   const windowWidth = useWindowWidth();
-  if (prefNameList.length === 0) {
+  if (prefList.length === 0) {
     return;
   }
 
@@ -32,7 +33,7 @@ export const DynamicChart = ({ data, prefNameList }: DynamicChartProps) => {
   }
 
   const getLegendLayout = (): LegendLayout => {
-    if (windowWidth < 480 || prefNameList.length >= 11) {
+    if (windowWidth < 480 || prefList.length >= 11) {
       return { align: 'left', layout: 'horizontal', verticalAlign: 'bottom' };
     }
     return { align: 'right', layout: 'vertical', verticalAlign: 'top' };
@@ -54,6 +55,13 @@ export const DynamicChart = ({ data, prefNameList }: DynamicChartProps) => {
     return [...colors1, ...colors2, ...colors3];
   };
 
+  const getColor = (index: number, colors: string[]) => {
+    if (index > colors.length || index < 0) {
+      return colors[0];
+    }
+    return colors[index];
+  };
+
   const legendLayout = getLegendLayout();
   const colors = createColors();
   return (
@@ -69,8 +77,15 @@ export const DynamicChart = ({ data, prefNameList }: DynamicChartProps) => {
           layout={legendLayout.layout}
           verticalAlign={legendLayout.verticalAlign}
         />
-        {prefNameList.map((name, key) => {
-          return <Line key={key} type='monotone' dataKey={name} stroke={colors[key]} />;
+        {prefList.map((pref, key) => {
+          return (
+            <Line
+              key={key}
+              type='monotone'
+              dataKey={pref.prefName}
+              stroke={getColor(pref.prefCode, colors)}
+            />
+          );
         })}
       </LineChart>
     </ResponsiveContainer>

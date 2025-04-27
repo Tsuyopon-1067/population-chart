@@ -64,15 +64,15 @@
 
 #### props
 
-| 名前           | 型                | 説明                                       |
-| -------------- | ----------------- | ------------------------------------------ |
-| `data`         | `LineChartData[]` | グラフに表示するデータ                     |
-| `prefNameList` | `string[]`        | 当道府県名の配列．dataのキーと一致させる． |
+| 名前       | 型                | 説明                                         |
+| ---------- | ----------------- | -------------------------------------------- |
+| `data`     | `LineChartData[]` | グラフに表示するデータ                       |
+| `prefList` | `Prefecture[]`    | 都道府県情報の配列．dataのキーと一致させる． |
 
 #### 使用例
 
 ```tsx
-<DynamicChart data={selectedLabelLineData} prefNameList={selectedPrefNameList} />
+<DynamicChart data={selectedLabelLineData} prefList={selectedPrefList} />
 ```
 
 #### 子コンポーネント・依存
