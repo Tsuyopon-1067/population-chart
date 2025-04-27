@@ -96,3 +96,113 @@
 #### 子コンポーネント・依存
 
 なし
+
+## Hooks
+
+### usePopulationComposition
+
+人口構成データを管理する．表示する人口構成データの提供と人口構成データのフェッチとキャッシュを行う．
+
+#### props
+
+なし
+
+#### 使用例
+
+```tsx
+const [updateCheckState, compositionMap, checkedPrefCodeList] = usePopulationComposition();
+```
+
+#### 子コンポーネント・依存
+
+なし
+
+### useWindowWidth
+
+ブラウザの画面幅を提供する．
+
+#### props
+
+なし
+
+#### 使用例
+
+```tsx
+const windowWidth = useWindowWidth();
+console.log(windowWidth);
+```
+
+#### 子コンポーネント・依存
+
+なし
+
+## 型定義
+
+### CheckboxData
+
+チェックボックスの状態管理と都道府県情報の提供．
+
+| プロパティ | 型        | 説明                                       |
+| ---------- | --------- | ------------------------------------------ |
+| prefCode   | `number`  | 都道府県コード                             |
+| prefName   | `string`  | 都道府県名                                 |
+| checked    | `boolean` | チェックボックスで選択されているとき`true` |
+
+### LineChartData
+
+グラフ上のある時点におけるデータ1件を表す．例えば2000年度のデータを表す．
+
+| プロパティ      | 型                              | 説明                                                              |
+| --------------- | ------------------------------- | ----------------------------------------------------------------- |
+| `[key: string]` | `string \| number \| undefined` | グラフでX軸ラベルとして指定したキーは必須．他はデータごとに追加． |
+
+#### 使用例
+
+```tsx
+const data: LineChartData[] = [
+  {
+    year: 2000,
+    A: 10,
+    B: 20,
+    C: 30,
+  },
+  {
+    year: 2005,
+    A: 20,
+    B: 10,
+    C: 20,
+  },
+  {
+    year: 2010,
+    A: 30,
+    B: 20,
+    C: 10,
+  },
+];
+```
+
+### PopulationCompositionEntry
+
+ある年度における人口構成データ1件を表す．
+
+| プロパティ | 型       | 説明                             |
+| ---------- | -------- | -------------------------------- |
+| year       | `number` | 年                               |
+| value      | `number` | 人口                             |
+| rate?      | `number` | 総人口のうちその人口が占める割合 |
+
+### PopulationCompositionPerYear
+
+APIリクエスト用．
+
+### populationCompositionPerYearResponse
+
+APIリクエスト用．
+
+### prefecture
+
+APIリクエスト用．
+
+### prefecturesResponse
+
+APIリクエスト用．

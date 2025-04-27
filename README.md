@@ -19,6 +19,9 @@ Vercelでデプロイしています．
 https://population-chart-kulthe85o-tsuyopon1067s-projects.vercel.app/
 
 ## 仕様
+### コンポーネント・Hooks・型定義
+[こちらを参照](./doc/components.md)
+
 ### コンポーネント構成
 
 ![](./doc/img/component.svg)
@@ -30,7 +33,7 @@ https://population-chart-kulthe85o-tsuyopon1067s-projects.vercel.app/
 ![](./doc/img/data.webp)
 
 ## 実装時間
-[こちら参照](./doc/time.md)
+[こちらを参照](./doc/time.md)
 
 ## 実装内容
-[こちら参照](./doc/doneList.md)
+[こちらを参照](./doc/doneList.md)
